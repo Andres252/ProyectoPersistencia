@@ -1,4 +1,4 @@
-package co.edu.unbosque.View;
+package co.edu.unbosque.view;
 
 public class ViewVentana {
 

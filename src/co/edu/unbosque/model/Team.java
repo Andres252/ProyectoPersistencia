@@ -1,4 +1,4 @@
-package co.edu.unbosque.Model;
+package co.edu.unbosque.model;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
