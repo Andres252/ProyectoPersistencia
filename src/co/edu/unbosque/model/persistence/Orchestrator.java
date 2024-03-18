@@ -34,4 +34,13 @@ public class Orchestrator {
             System.out.println(e.getMessage());
         }
     }
+
+    public void ban(String key) {
+        try {
+            data.remove(key);
+            data.store(new FileOutputStream(file), null);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
