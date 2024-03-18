@@ -10,12 +10,6 @@ public class Team {
     private String name;
     private int star;
 
-    public Team() {
-        id = 0;
-        name = "unknown";
-        star = 0;
-    }
-
     public int getId() {
         return id;
     }

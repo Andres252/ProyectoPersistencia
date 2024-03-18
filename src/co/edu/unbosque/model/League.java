@@ -2,19 +2,17 @@ package co.edu.unbosque.model;
 
 import co.edu.unbosque.model.persistence.Orchestrator;
 import co.edu.unbosque.util.AliasException;
-import co.edu.unbosque.util.NullExeception;
+import co.edu.unbosque.util.NullException;
 
 import java.util.ArrayList;
 
 public class League {
-    private final Team team;
     private final Orchestrator orchestrator;
     private final ArrayList<Team> clubs;
 
     public League() {
         orchestrator = new Orchestrator();
         clubs = new ArrayList<>();
-        team = new Team();
     }
 
     private void cleanLeague() {
@@ -71,33 +69,33 @@ public class League {
         try {
             if (findNameClub(name) != -1) throw new AliasException("El nombre del equipo ya existe");
 
-            if (!findIdClub(id)) throw new NullExeception("El equipo no existe");
+            if (!findIdClub(id)) throw new NullException("El equipo no existe");
 
             orchestrator.write("equipo" + id, name);
 
             cleanLeague();
             initArrayElements();
-        } catch (AliasException | NullExeception e) {
+        } catch (AliasException | NullException e) {
             System.out.println(e.getMessage());
         }
     }
 
     public void patchClub(int id, int start) {
         try {
-            if (!findIdClub(id)) throw new NullExeception("El equipo no existe");
+            if (!findIdClub(id)) throw new NullException("El equipo no existe");
 
             orchestrator.write("estrellas" + id, String.valueOf(start));
 
             cleanLeague();
             initArrayElements();
-        } catch (NullExeception e) {
+        } catch (NullException e) {
             System.out.println(e.getMessage());
         }
     }
 
     public void destroyClub(int id) {
         try {
-            if (!findIdClub(id)) throw new NullExeception("El equipo no existe");
+            if (!findIdClub(id)) throw new NullException("El equipo no existe");
 
             if (id == clubs.size()) {
                 orchestrator.ban("id" + id);
@@ -115,7 +113,7 @@ public class League {
             }
             cleanLeague();
             initArrayElements();
-        } catch (NullExeception e) {
+        } catch (NullException e) {
             System.out.println(e.getMessage());
         }
     }
