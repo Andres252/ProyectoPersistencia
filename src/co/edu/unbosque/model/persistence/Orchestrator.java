@@ -7,30 +7,31 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class Orchestrator {
-    final private File file;
+    private final File file;
     private final Properties data;
 
     public Orchestrator() {
-        file = new File("data\\leaderboard.properties");
+        file = new File("src//data//leaderboard.properties");
         data = new Properties();
     }
 
-    public void read() throws IOException {
+    public String read(String key) {
+        String res;
         try {
-            FileInputStream in = new FileInputStream(file);
-            data.load(in);
-            in.close();
-        } catch (IOException e) {
-            throw new IOException("Formato Inv�lido");
+            data.load(new FileInputStream(file));
+            res = data.getProperty(key);
+        } catch (IOException ex) {
+            return null;
         }
+        return res;
     }
 
-    public void write(String key, String value) throws IOException {
+    public void write(String key, String value) {
         try {
             data.setProperty(key, value);
             data.store(new FileOutputStream(file), null);
         } catch (IOException e) {
-            throw new IOException("Formato Inv�lido");
+            System.out.println(e.getMessage());
         }
     }
 }
